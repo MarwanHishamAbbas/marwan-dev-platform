@@ -1,22 +1,18 @@
 import { ArrowUpRight } from "lucide-react";
-import Image from "next/image";
+
 import Link from "next/link";
 import React from "react";
 import { Button } from "@workspace/ui/components/button";
+import Logo from "../ui/Logo";
+import ThemeToggle from "../theme/ThemeToggle";
 
 const Footer = () => {
   return (
     <footer className="container mx-auto space-y-10 px-3 py-12">
       <div className="flex flex-col items-start justify-between gap-10 md:flex-row">
-        <Image
-          src="/logo.png"
-          alt="Logo"
-          width={35}
-          height={35}
-          loading={"eager"}
-        />
+        <Logo />
         <div className="flex gap-10">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 items-center">
             <p className="font-medium text-white/50">MAIN</p>
             <Button variant={"ghost"}>
               <Link href="/" className="flex items-c enter gap-2">
@@ -34,7 +30,7 @@ const Footer = () => {
               </Link>
             </Button>
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 items-center">
             <p className="font-medium text-white/50">CONTACT</p>
             <Button variant={"ghost"}>
               <Link
@@ -67,15 +63,20 @@ const Footer = () => {
         </div>
       </div>
       <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
-        <div className="text-sm md:text-base">
+        <div className="text-sm ">
           <p>© 2025 Marwan Hisham. All Rights Reserved.</p>
-          <p className="text-white/50">
+          <p className="dark:text-white/50 text-black/50">
             Made with Love and Expresso (0% sugar, 20% Milk).
           </p>
         </div>
-        <p className="text-sm text-white/50">
-          Last updated by Marwan on Feb 2, 2025, 7:10 PM EST
-        </p>
+        <div className="flex flex-col gap-5">
+          <div className="md:text-right">
+            <ThemeToggle />
+          </div>
+          <p className="text-sm dark:text-white/50 text-black/50">
+            Last updated by Marwan on Feb 2, 2025, 7:10 PM EST
+          </p>
+        </div>
       </div>
     </footer>
   );

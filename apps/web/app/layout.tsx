@@ -3,7 +3,7 @@ import "@workspace/ui/globals.css";
 import TailwindIndicator from "@workspace/ui/components/tailwind-indicator";
 import Footer from "@/components/layout/Footer";
 import { Metadata, Viewport } from "next";
-import { DM_Sans } from "next/font/google";
+import { DM_Sans, Newsreader } from "next/font/google";
 import Navbar from "@/components/layout/Navbar/Navbar";
 
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
@@ -28,9 +28,8 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
           <main className="md:mt-46 mb-20 mt-36 md:mb-32">{children}</main>
-          <hr className="border-white/5" />
+          <hr className="dark:border-white/5 border-black/5" />
           <Footer />
           <TailwindIndicator />
         </ThemeProvider>

@@ -8,7 +8,7 @@ const Links = () => {
     <>
       <ExternalLinks />
 
-      <Button variant={"outline"} size={"icon"} className="md:hidden">
+      <Button variant={"ghost"} size={"icon"} className="md:hidden">
         <Link href="https://www.linkedin.com/in/marwanhiisham/" target="_blank">
           <Linkedin size={20} />
         </Link>
