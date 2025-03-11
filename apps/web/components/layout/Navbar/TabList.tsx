@@ -24,9 +24,9 @@ const TabList: React.FC<{ tabs: { title: string; href: string }[] }> = ({
 
   // Apply styles for the default selected tab
   const defaultSelectedTabStyles = [
-    "[&:nth-child(1)]:bg-white/10 ",
-    "[&:nth-child(2)]:bg-white/10 ",
-    "[&:nth-child(3)]:bg-white/10 ",
+    "[&:nth-child(1)]:bg-black/10 [&:nth-child(1)]:dark:bg-white/10",
+    "[&:nth-child(2)]:bg-black/10 [&:nth-child(2)]:dark:bg-white/10",
+    "[&:nth-child(3)]:bg-black/10 [&:nth-child(3)]:dark:bg-white/10",
   ];
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const TabList: React.FC<{ tabs: { title: string; href: string }[] }> = ({
   return (
     <div
       className={
-        "relative flex w-fit items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5 px-1 py-1.5 drop-shadow-xl backdrop-blur-2xl md:px-2"
+        "relative flex w-fit items-center justify-center overflow-hidden rounded-full border dark:border-white/10 border-black/10   dark:bg-white/5 bg-black/5 px-1 py-1.5 drop-shadow-xl backdrop-blur-2xl md:px-2"
       }
     >
       {tabs.map((link, i) => (
@@ -69,7 +69,7 @@ const TabList: React.FC<{ tabs: { title: string; href: string }[] }> = ({
           }}
           className={cn(
             "flex h-fit items-center justify-center text-nowrap rounded-full px-4 py-1.5 text-sm transition-colors duration-200 md:px-6",
-            currentLink.index === i && "text-white",
+            currentLink.index === i && "dark:text-white text-black",
             fired.current
               ? ""
               : defaultSelectedTabStyles[defaultSelectedTabIndex]
@@ -89,7 +89,7 @@ const TabList: React.FC<{ tabs: { title: string; href: string }[] }> = ({
             }}
             className={cn(
               `absolute top-1/2 -z-[1] h-full -translate-y-1/2 rounded-full transition-[color,left,width] duration-300 after:absolute after:h-1 after:w-1/2 after:-translate-y-1.5 after:translate-x-3.5 after:rounded-md after:bg-white after:content-[''] after:[box-shadow:0px_2px_25px_2px_#ffffff] md:after:translate-x-5`,
-              fired.current ? "bg-white/10" : "bg-transparent"
+              fired.current ? "dark:bg-white/10 bg-black/10" : "bg-transparent"
             )}
           />
         </div>

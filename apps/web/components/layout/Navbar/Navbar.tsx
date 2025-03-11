@@ -2,9 +2,8 @@ import Image from "next/image";
 import React from "react";
 import Links from "./Links";
 import TabList from "./TabList";
-import { ThemeToggle } from "../ThemeToggle";
 
-const Navbar = () => {
+const Navbar = async () => {
   return (
     <header className="container fixed left-0 right-0 top-0 z-[999] mx-auto grid h-20  px-3 backdrop-blur-md">
       <nav className="flex h-full items-center justify-between">
