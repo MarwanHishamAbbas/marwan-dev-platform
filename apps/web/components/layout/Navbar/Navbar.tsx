@@ -24,7 +24,7 @@ const Navbar = () => {
         <TabList
           tabs={[
             { title: "Work", href: "" },
-            { title: "Info", href: "info" },
+            { title: "About", href: "about" },
             { title: "Blog", href: "blog" },
           ]}
         />

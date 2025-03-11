@@ -1,7 +1,13 @@
-import { PropsWithChildren, type FC } from "react";
+import { HTMLAttributes, PropsWithChildren, type FC } from "react";
 
-const Slicer: FC<PropsWithChildren> = ({ children }) => {
-  return <main className="space-y-10 md:space-y-14">{children}</main>;
+interface SlicerProps extends HTMLAttributes<HTMLDivElement> {}
+
+const Slicer: FC<SlicerProps> = ({ children, ...props }) => {
+  return (
+    <main className="space-y-10 md:space-y-14" {...props}>
+      {children}
+    </main>
+  );
 };
 
 export default Slicer;

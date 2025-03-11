@@ -84,11 +84,11 @@ const TabList: React.FC<{ tabs: { title: string; href: string }[] }> = ({
         <div className={"relative h-full w-full"}>
           <div
             style={{
-              left: `calc(${currentLink.left || 0}px - 0.75rem + 0.2rem)`,
+              left: `calc(${currentLink.left || 0}px - 0.75rem + 0.25rem)`,
               width: `${currentLink.width || 0}px`,
             }}
             className={cn(
-              `absolute top-1/2 -z-[1] h-full -translate-y-1/2 rounded-full transition-[color,left,width] duration-300 after:absolute after:h-1 after:w-1/2 after:-translate-y-1.5 after:translate-x-3.5 after:rounded-md dark:after:bg-white after:bg-black/30 after:content-[''] dark:after:[box-shadow:0px_2px_25px_2px_#ffffff]  after:[box-shadow:0px_2px_25px_2px_#202020] md:after:translate-x-5`,
+              `absolute top-1/2 -z-[1] h-full -translate-y-1/2 rounded-full transition-[color,left,width] duration-300 after:absolute after:h-1 after:w-1/2 after:-translate-y-1.5 after:translate-x-4 after:rounded-md dark:after:bg-white after:bg-black/30 after:content-[''] dark:after:[box-shadow:0px_2px_25px_2px_#ffffff]  after:[box-shadow:0px_2px_25px_2px_#202020] md:after:translate-x-5`,
               fired.current ? "dark:bg-white/10 bg-black/10" : "bg-transparent"
             )}
           />
