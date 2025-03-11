@@ -1,18 +1,11 @@
-import { Geist, Geist_Mono } from "next/font/google";
-
 import "@workspace/ui/globals.css";
-import { Providers } from "@/components/providers";
+
 import TailwindIndicator from "@workspace/ui/components/tailwind-indicator";
+import Footer from "@/components/layout/Footer";
+import { Metadata, Viewport } from "next";
+import { DM_Sans } from "next/font/google";
 
-const fontSans = Geist({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
-
-const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-});
+const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -20,11 +13,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
-      >
-        <Providers>{children}</Providers>
+    <html
+      suppressHydrationWarning
+      lang="en-US"
+      className={`${dmSans.className} dark`}
+    >
+      <body className="grid min-h-[100dvh] grid-rows-[1fr_auto] antialiased">
+        <main className="md:mt-46 mb-20 mt-36 md:mb-32">{children}</main>
+        <hr className="border-white/5" />
+        <Footer />
         <TailwindIndicator />
       </body>
     </html>
