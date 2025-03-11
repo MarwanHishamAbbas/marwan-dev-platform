@@ -1,5 +1,4 @@
 import { ArrowUpRight } from "lucide-react";
-
 import Link from "next/link";
 import React from "react";
 import { Button } from "@workspace/ui/components/button";

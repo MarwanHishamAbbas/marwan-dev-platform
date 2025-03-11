@@ -162,11 +162,7 @@
   }
 }
 
-
-
-
 /* Custom CSS */
-
 
 .glowing {
   text-shadow:
@@ -194,7 +190,6 @@
     0px 0px 30px rgba(255, 255, 255, 0.2);
 }
 
-
 .top-seperator {
   @apply relative after:absolute after:inset-0 after:h-[1px] after:w-full after:content-[''];
 }
@@ -205,4 +200,13 @@
     #ffffff 50%,
     rgba(0, 0, 0, 0) 80%
   );
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

@@ -9,10 +9,21 @@ interface ProjectCardProps {}
 const ProjectCard: FC<ProjectCardProps> = ({}) => {
   return (
     <Wrapper>
-      <Card>
+      <Card className="group">
+        <div
+          style={{
+            backgroundImage: `radial-gradient(
+                circle at 50% 0,
+                ${"#3FA9F57a"},
+                rgba(0, 0, 0, 0) 80%
+            ),
+            radial-gradient(circle at 50% 0, #0000007a, rgba(0, 0, 0, 0))`,
+          }}
+          className="absolute left-0 right-0 top-0 h-full overflow-hidden opacity-0 transition-opacity group-hover:opacity-100"
+        />
         <Link
           href={`/about`}
-          className="group block space-y-16 p-4 pb-0 md:p-10 md:pb-0"
+          className=" block space-y-16 p-4 pb-0 md:p-10 md:pb-0 relative"
         >
           <div className="flex items-center justify-between gap-10">
             <div className="space-y-2">
