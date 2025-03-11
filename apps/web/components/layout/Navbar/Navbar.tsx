@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import Links from "./Links";
 import TabList from "./TabList";
+import { ThemeToggle } from "../ThemeToggle";
 
 const Navbar = () => {
   return (
@@ -17,11 +18,11 @@ const Navbar = () => {
           />
           <div className="hidden md:block">
             <h4 className="text-lg font-medium leading-tight">Marwan Hisham</h4>
-            {/* <p className="text-xs text-white/50">Full-Stack Developer</p> */}
+
             <div className="relative flex items-center">
               <div className="size-2 bg-green-500  rounded-full"></div>
               <div className="absolute size-2 bg-green-500 rounded-full animate-ping opacity-75"></div>
-              <span className="ml-1 text-xs text-white/50">
+              <span className="ml-1 text-xs text-black/50 dark:text-white/50 ">
                 Available for work
               </span>
             </div>
@@ -34,6 +35,7 @@ const Navbar = () => {
             { title: "Blog", href: "blog" },
           ]}
         />
+
         <Links />
       </nav>
     </header>

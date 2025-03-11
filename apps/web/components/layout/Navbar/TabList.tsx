@@ -49,7 +49,7 @@ const TabList: React.FC<{ tabs: { title: string; href: string }[] }> = ({
   return (
     <div
       className={
-        "relative flex w-fit items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5 px-0.5 py-1 drop-shadow-xl backdrop-blur-2xl md:px-2"
+        "relative flex w-fit items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5 px-1 py-1.5 drop-shadow-xl backdrop-blur-2xl md:px-2"
       }
     >
       {tabs.map((link, i) => (
@@ -68,7 +68,7 @@ const TabList: React.FC<{ tabs: { title: string; href: string }[] }> = ({
             }));
           }}
           className={cn(
-            "flex h-fit items-center justify-center text-nowrap rounded-full px-3 py-1.5 text-sm transition-colors duration-200 md:px-6 md:text-base",
+            "flex h-fit items-center justify-center text-nowrap rounded-full px-4 py-1.5 text-sm transition-colors duration-200 md:px-6",
             currentLink.index === i && "text-white",
             fired.current
               ? ""

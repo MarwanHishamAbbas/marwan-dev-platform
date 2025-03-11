@@ -2,15 +2,16 @@ import { Button } from "@workspace/ui/components/button";
 import { ArrowUpRight, Linkedin } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { ThemeToggle } from "../ThemeToggle";
 
 const Links = () => {
   return (
     <>
       <ExternalLinks />
 
-      <Button size={"icon"} className="md:hidden">
+      <Button variant={"outline"} size={"icon"} className="md:hidden">
         <Link href="https://www.linkedin.com/in/marwanhiisham/" target="_blank">
-          <Linkedin size={18} />
+          <Linkedin size={20} />
         </Link>
       </Button>
     </>
@@ -40,6 +41,7 @@ export const ExternalLinks = () => {
           Resume <ArrowUpRight size={18} />
         </Link>
       </Button>
+      <ThemeToggle />
     </div>
   );
 };
