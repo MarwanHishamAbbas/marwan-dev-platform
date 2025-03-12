@@ -10,7 +10,10 @@ const getEnvVariable = (name: string) => {
 export default defineConfig({
   dialect: "postgresql",
   schema: "./src/schema.ts",
+  out: "./drizzle/migrations",
   dbCredentials: {
     url: getEnvVariable("DATABASE_URL"),
   },
+  strict: true,
+  verbose: true,
 });

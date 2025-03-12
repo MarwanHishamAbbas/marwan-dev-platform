@@ -8,8 +8,9 @@
   "scripts": {
     "db:seed": "tsx scripts/seed.ts",
     "db:studio": "drizzle-kit studio",
-    "generate": "drizzle-kit generate",
-    "db:push": "drizzle-kit push"
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:drop": "drizzle-kit drop"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
@@ -21,6 +22,7 @@
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "drizzle-kit": "^0.30.5",
-    "tsx": "^4.19.3"
+    "tsx": "^4.19.3",
+    "uuid": "^11.1.0"
   }
 }

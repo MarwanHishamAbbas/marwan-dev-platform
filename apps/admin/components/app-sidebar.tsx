@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Command, Frame, LifeBuoy, SquareTerminal } from "lucide-react";
+import { Command, Frame, Globe } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
 import { NavProjects } from "@/components/nav-projects";
@@ -51,8 +51,8 @@ const data = {
   navSecondary: [
     {
       title: "Portfolio Website",
-      url: "http://localhost:3000",
-      icon: LifeBuoy,
+      url: process.env.NEXT_PUBLIC_PORTFOLIO_URL ?? "http://localhost:3000",
+      icon: Globe,
     },
   ],
 };
