@@ -7,10 +7,9 @@
   },
   "scripts": {
     "db:seed": "tsx scripts/seed.ts",
-    "db:migrate": "tsx scripts/migrate.ts",
     "db:studio": "drizzle-kit studio",
     "generate": "drizzle-kit generate",
-    "push": "drizzle-kit push"
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
     "dotenv": "^16.4.7",

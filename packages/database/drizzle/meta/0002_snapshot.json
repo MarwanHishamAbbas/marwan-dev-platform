@@ -1,9 +1,40 @@
 {
-  "id": "66b29f10-ba1d-4b7e-97ae-cf801c4b755c",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "970cccc5-2f71-40a6-8491-4436f466d0d1",
+  "prevId": "b09c4e28-6526-49ac-88fa-d72a4bd64084",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.hellos": {
+      "name": "hellos",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "full_name": {
+          "name": "full_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone": {
+          "name": "phone",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.persons": {
       "name": "persons",
       "schema": "",
@@ -54,6 +85,12 @@
         "phone": {
           "name": "phone",
           "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "address": {
+          "name": "address",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         }

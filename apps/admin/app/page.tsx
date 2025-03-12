@@ -1,6 +1,9 @@
 import Navbar from "@/components/layout/Navbar";
+import { db } from "@workspace/database";
 
-export default function Page() {
+export default async function Page() {
+  const users = await db.query.users.findMany();
+  console.log(users);
   return (
     <>
       <Navbar

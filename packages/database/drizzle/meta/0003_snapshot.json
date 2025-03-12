@@ -1,40 +1,9 @@
 {
-  "id": "66b29f10-ba1d-4b7e-97ae-cf801c4b755c",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "1a81c7e7-3b38-4c40-bf93-23f61dddd9e7",
+  "prevId": "970cccc5-2f71-40a6-8491-4436f466d0d1",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.persons": {
-      "name": "persons",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "full_name": {
-          "name": "full_name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "phone": {
-          "name": "phone",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
     "public.users": {
       "name": "users",
       "schema": "",
@@ -54,6 +23,12 @@
         "phone": {
           "name": "phone",
           "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "address": {
+          "name": "address",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         }
