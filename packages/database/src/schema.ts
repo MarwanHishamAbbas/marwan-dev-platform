@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   boolean,
   timestamp,
@@ -6,6 +7,7 @@ import {
   primaryKey,
   integer,
   pgEnum,
+  uuid,
 } from "drizzle-orm/pg-core";
 
 export const ROLE = pgEnum("role", ["BASIC", "ADMIN"]);
@@ -93,3 +95,44 @@ export const authenticators = pgTable(
     },
   ]
 );
+
+// Blog posts table
+export const blogPosts = pgTable("blog_post", {
+  id: uuid("id").primaryKey().defaultRandom(),
+
+  // Author - linked to user
+  authorId: text("author_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+
+  // Blog content
+  title: text("title").notNull(),
+  slug: text("slug").notNull().unique(), // URL-friendly version of the title
+  content: text("content").notNull(), // For markdown content
+  excerpt: text("excerpt"), // Optional short description
+
+  // Media
+  coverImageUrl: text("cover_image_url"),
+
+  // Tags - Postgres supports arrays
+  tags: text("tags").array(), // Array of strings for tags
+
+  // Status
+  status: text("status").notNull().default("DRAFT"),
+
+  // Timestamps
+  createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { mode: "date" }).defaultNow().notNull(),
+  publishedAt: timestamp("published_at", { mode: "date" }),
+});
+
+export const usersRelations = relations(users, ({ many }) => ({
+  blogPost: many(blogPosts),
+}));
+
+export const postsRelations = relations(blogPosts, ({ one }) => ({
+  author: one(users, { fields: [blogPosts.authorId], references: [users.id] }),
+}));
+
+export type NewBlogPost = typeof blogPosts.$inferInsert;
+export type BlogPost = typeof blogPosts.$inferSelect;

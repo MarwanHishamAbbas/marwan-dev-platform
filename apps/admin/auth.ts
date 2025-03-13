@@ -26,19 +26,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: "/login",
   },
   callbacks: {
-    async signIn({ account, user }) {
-      // Allow OAuth without email verification
-
-      const existingUser = await getUserById(user.id as string);
-
-      // Prevent Sign in without email verifiction
-      if (!existingUser?.emailVerified) return false;
-
-      // TODO: 2FA Check
-
-      return true;
-    },
-
     async jwt({ token }) {
       if (!token.sub) return token;
       const existingUser = await getUserById(token.sub);

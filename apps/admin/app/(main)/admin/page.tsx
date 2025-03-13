@@ -6,7 +6,7 @@ export default async function Page() {
       <Navbar
         items={[
           {
-            label: "Dashboard",
+            label: "Admin Dashboard",
             isCurrentPage: true,
           },
         ]}

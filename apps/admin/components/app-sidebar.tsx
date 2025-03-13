@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Command, Frame, Globe } from "lucide-react";
+import { Command, Frame, Globe, Paperclip } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
 import { NavProjects } from "@/components/nav-projects";
@@ -19,18 +19,26 @@ import {
 import ThemeToggle from "./theme/ThemeToggle";
 import Link from "next/link";
 import Logo from "./ui/Logo";
+import { useSession } from "next-auth/react";
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/logo.png",
-  },
   navMain: [
     {
       title: "Projects",
-      url: "/projects",
+      url: "/admin/projects",
       icon: Command,
+      isActive: true,
+      items: [
+        {
+          title: "History",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Blog Posts",
+      url: "/admin/blog-posts",
+      icon: Paperclip,
       isActive: true,
       items: [
         {
@@ -58,6 +66,7 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { data: user } = useSession();
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
@@ -89,7 +98,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user?.user} />
       </SidebarFooter>
     </Sidebar>
   );

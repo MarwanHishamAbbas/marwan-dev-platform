@@ -3,12 +3,10 @@ import "@workspace/ui/globals.css";
 import TailwindIndicator from "@workspace/ui/components/tailwind-indicator";
 import Footer from "@/components/layout/Footer";
 import { Metadata, Viewport } from "next";
-import { DM_Sans, Newsreader } from "next/font/google";
+
 import Navbar from "@/components/layout/Navbar/Navbar";
 
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-
-const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export default async function RootLayout({
   children,
@@ -16,11 +14,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en-US"
-      className={`${dmSans.className}`}
-      suppressHydrationWarning
-    >
+    <html lang="en-US" suppressHydrationWarning>
       <body className="grid min-h-[100dvh] grid-rows-[1fr_auto] antialiased">
         <ThemeProvider
           attribute="class"

@@ -23,7 +23,7 @@ const Page: FC<PageProps> = ({}) => {
 
   async function signInGoogle() {
     googleTransition(async () => {
-      await signIn("google", { callbackUrl: "/" });
+      await signIn("google");
     });
   }
 

@@ -1,5 +1,4 @@
 import Navbar from "@/components/layout/Navbar";
-import Breadcrumbs from "@/components/ui/Breadcumbs";
 import { type FC } from "react";
 
 type PageProps = {};

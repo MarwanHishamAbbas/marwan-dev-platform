@@ -1,7 +1,7 @@
 import { type DefaultSession } from "next-auth";
-
+import { ROLE } from "@workspace/database";
 export type ExtendedUser = DefaultSession["user"] & {
-  role: UserRole;
+  role: "ADMIN" | "BASIC";
 };
 
 declare module "next-auth" {
