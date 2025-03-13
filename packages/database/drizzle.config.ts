@@ -14,6 +14,4 @@ export default defineConfig({
   dbCredentials: {
     url: getEnvVariable("DATABASE_URL"),
   },
-  strict: true,
-  verbose: true,
 });

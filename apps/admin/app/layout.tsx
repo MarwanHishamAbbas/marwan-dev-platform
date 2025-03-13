@@ -2,14 +2,7 @@ import "@workspace/ui/globals.css";
 
 import TailwindIndicator from "@workspace/ui/components/tailwind-indicator";
 import { DM_Sans } from "next/font/google";
-import { AppSidebar } from "@/components/app-sidebar";
 
-import { Separator } from "@workspace/ui/components/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@workspace/ui/components/sidebar";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 const dmSans = DM_Sans({ subsets: ["latin"] });
@@ -32,10 +25,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider>
-            <AppSidebar />
-            <SidebarInset>{children}</SidebarInset>
-          </SidebarProvider>
+          {children}
           <TailwindIndicator />
         </ThemeProvider>
       </body>

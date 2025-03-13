@@ -1,74 +1,95 @@
 import {
-  index,
+  boolean,
+  timestamp,
   pgTable,
-  primaryKey,
-  serial,
   text,
-  uniqueIndex,
-  uuid,
-  varchar,
+  primaryKey,
+  integer,
+  pgEnum,
 } from "drizzle-orm/pg-core";
-import { relations } from "drizzle-orm";
 
-export const user = pgTable(
-  "user",
+export const ROLE = pgEnum("role", ["BASIC", "ADMIN"]);
+
+export const users = pgTable("user", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  name: text("name"),
+  email: text("email").unique(),
+  emailVerified: timestamp("emailVerified", { mode: "date" }),
+  image: text("image"),
+  role: ROLE().default("BASIC").notNull(),
+});
+
+export const accounts = pgTable(
+  "account",
   {
-    id: uuid().primaryKey().defaultRandom(),
-
-    fullName: text("full_name"),
-    email: varchar("email").notNull(),
-    phone: varchar("phone", { length: 256 }),
-    address: text("address"),
+    userId: text("userId")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    provider: text("provider").notNull(),
+    type: text("type").notNull(),
+    providerAccountId: text("providerAccountId").notNull(),
+    refresh_token: text("refresh_token"),
+    access_token: text("access_token"),
+    expires_at: integer("expires_at"),
+    token_type: text("token_type"),
+    scope: text("scope"),
+    id_token: text("id_token"),
+    session_state: text("session_state"),
   },
-  (table) => [uniqueIndex("email_idx").on(table.email)]
-);
-
-export const post = pgTable(
-  "post",
-  {
-    id: uuid().primaryKey().defaultRandom(),
-    slug: varchar().unique(),
-    title: varchar({ length: 256 }),
-    // One to Many
-    authorId: uuid("author_id")
-      .references(() => user.id)
-      .notNull(),
-  },
-  (table) => [
-    uniqueIndex("slug_idx").on(table.slug),
-    index("title_idx").on(table.title),
+  (account) => [
+    {
+      compoundKey: primaryKey({
+        columns: [account.provider, account.providerAccountId],
+      }),
+    },
   ]
 );
 
-export const category = pgTable("category", {
-  id: uuid().primaryKey().defaultRandom(),
-  title: varchar("title").notNull(),
+export const sessions = pgTable("session", {
+  sessionToken: text("sessionToken").primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  expires: timestamp("expires", { mode: "date" }).notNull(),
 });
 
-// Many to Many
-export const postCategory = pgTable(
-  "post_category",
+export const verificationTokens = pgTable(
+  "verificationToken",
   {
-    postId: uuid("postId")
-      .references(() => post.id)
-      .notNull(),
-    categoryId: uuid("categoryId")
-      .references(() => category.id)
-      .notNull(),
+    identifier: text("identifier").notNull(),
+    token: text("token").notNull(),
+    expires: timestamp("expires", { mode: "date" }).notNull(),
   },
-  // Composite Primary Key
-  (table) => [primaryKey({ columns: [table.postId, table.categoryId] })]
+  (verificationToken) => [
+    {
+      compositePk: primaryKey({
+        columns: [verificationToken.identifier, verificationToken.token],
+      }),
+    },
+  ]
 );
 
-// RELATIONS
-
-export const userRelations = relations(user, ({ one, many }) => ({
-  posts: many(post),
-}));
-
-export const postRelations = relations(post, ({ one, many }) => ({
-  author: one(user, {
-    fields: [post.authorId],
-    references: [user.id],
-  }),
-}));
+export const authenticators = pgTable(
+  "authenticator",
+  {
+    credentialID: text("credentialID").notNull().unique(),
+    userId: text("userId")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    providerAccountId: text("providerAccountId").notNull(),
+    credentialPublicKey: text("credentialPublicKey").notNull(),
+    counter: integer("counter").notNull(),
+    credentialDeviceType: text("credentialDeviceType").notNull(),
+    credentialBackedUp: boolean("credentialBackedUp").notNull(),
+    transports: text("transports"),
+  },
+  (authenticator) => [
+    {
+      compositePK: primaryKey({
+        columns: [authenticator.userId, authenticator.credentialID],
+      }),
+    },
+  ]
+);
