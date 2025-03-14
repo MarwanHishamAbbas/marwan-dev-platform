@@ -7,9 +7,7 @@ import {
   verificationTokens,
 } from "@workspace/database";
 import NextAuth from "next-auth";
-import Google from "next-auth/providers/google";
-import { eq } from "drizzle-orm";
-import { getUserById } from "./lib/users";
+import authConfig from "./config/auth.config";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: DrizzleAdapter(db, {
@@ -21,30 +19,5 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: {
     strategy: "jwt",
   },
-  providers: [Google],
-  pages: {
-    signIn: "/login",
-  },
-  callbacks: {
-    async jwt({ token }) {
-      if (!token.sub) return token;
-      const existingUser = await getUserById(token.sub);
-      if (!existingUser) return token;
-      token.role = existingUser.role;
-
-      // This token can be accessed inside the middelware.ts
-
-      return token;
-    },
-    async session({ token, session }) {
-      if (token.sub && session.user) {
-        session.user.id = token.sub;
-      }
-      if (token.role && session.user) {
-        session.user.role = token.role;
-      }
-
-      return session;
-    },
-  },
+  ...authConfig,
 });
