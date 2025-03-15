@@ -98,10 +98,7 @@ export async function updateBlogPost(id: string, data: BlogPostUpdate) {
     await db.update(blogPosts).set(updateData).where(eq(blogPosts.id, id));
 
     // Revalidate the blog post page to show the updated content
-    revalidatePath(`/blog/${id}`);
-    revalidatePath("/blog");
-
-    return { success: true };
+    revalidatePath("/blog-posts");
   } catch (error) {
     console.error("Error updating blog post:", error);
     throw error;

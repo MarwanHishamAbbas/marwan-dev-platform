@@ -16,7 +16,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@workspace/ui/components/sidebar";
-import ThemeToggle from "./theme/ThemeToggle";
+
 import Link from "next/link";
 import Logo from "./ui/Logo";
 import { useSession } from "next-auth/react";
@@ -85,7 +85,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     Full-Stack Developer
                   </span>
                 </div>
-                <ThemeToggle />
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>

@@ -1,22 +1,49 @@
+import Navbar from "@/components/layout/Navbar";
 import { getBlogPost, updateBlogPost } from "../../_actions/actions";
 import { BlogPostEditor } from "../../_components/blog-post-editor";
 
-export default async function BlogPostPage() {
-  // Fetch an existing post for editing
-  const existingPost = await getBlogPost("new-blog-post");
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+import { type FC } from "react";
+
+const BlogPostPage: FC<PageProps> = async ({ params }) => {
+  const { slug } = await params;
+  const existingPost = await getBlogPost(slug);
 
   return (
-    <div className="container py-10 space-y-16">
-      {existingPost && (
-        <section>
-          <h2 className="text-2xl font-bold mb-6">Edit Existing Blog Post</h2>
-          <BlogPostEditor
-            type="update"
-            defaultValues={existingPost}
-            updateAction={updateBlogPost}
-          />
-        </section>
-      )}
-    </div>
+    <>
+      <Navbar
+        items={[
+          {
+            label: "Admin",
+            href: "/admin",
+          },
+          {
+            label: "Blog Posts",
+            href: "/blog-posts",
+          },
+          {
+            label: "Update Post",
+            isCurrentPage: true,
+          },
+        ]}
+      />
+      <div className="px-4">
+        {existingPost && (
+          <section>
+            <BlogPostEditor
+              type="update"
+              defaultValues={existingPost}
+              // This allows the client component to call the server action
+              updateAction={updateBlogPost}
+            />
+          </section>
+        )}
+      </div>
+    </>
   );
-}
+};
+
+export default BlogPostPage;

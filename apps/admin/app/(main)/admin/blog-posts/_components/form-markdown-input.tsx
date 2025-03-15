@@ -32,10 +32,11 @@ export function FormMarkdownInput({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className="flex flex-col">
           {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
             <MarkdownInput
+              className="h-full"
               value={field.value || ""}
               onChange={field.onChange}
               placeholder={placeholder}

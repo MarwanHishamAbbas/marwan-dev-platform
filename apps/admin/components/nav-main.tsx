@@ -19,6 +19,7 @@ import {
   SidebarMenuSubItem,
 } from "@workspace/ui/components/sidebar";
 import Link from "next/link";
+import { Skeleton } from "@workspace/ui/components/skeleton";
 
 export function NavMain({
   items,
@@ -60,9 +61,10 @@ export function NavMain({
                       {item.items?.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
-                            <Link href={subItem.url}>
+                            {/* <Link href={subItem.url}>
                               <span>{subItem.title}</span>
-                            </Link>
+                            </Link> */}
+                            <Skeleton className="h-3 rounded" />
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}
