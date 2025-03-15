@@ -21,52 +21,51 @@ import Link from "next/link";
 import Logo from "./ui/Logo";
 import { useSession } from "next-auth/react";
 
-const data = {
-  navMain: [
-    {
-      title: "Projects",
-      url: "/admin/projects",
-      icon: Command,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Blog Posts",
-      url: "/admin/blog-posts",
-      icon: Paperclip,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-      ],
-    },
-  ],
-
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-  ],
-  navSecondary: [
-    {
-      title: "Portfolio Website",
-      url: process.env.NEXT_PUBLIC_PORTFOLIO_URL ?? "http://localhost:3000",
-      icon: Globe,
-    },
-  ],
-};
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: user } = useSession();
+  const data = {
+    navMain: [
+      {
+        title: "Projects",
+        url: "/admin/projects",
+        icon: Command,
+        isActive: true,
+        items: [
+          {
+            title: "History",
+            url: "#",
+          },
+        ],
+      },
+      {
+        title: "Blog Posts",
+        url: "/admin/blog-posts",
+        icon: Paperclip,
+        isActive: true,
+        items: [
+          {
+            title: "History",
+            url: "#",
+          },
+        ],
+      },
+    ],
+
+    projects: [
+      {
+        name: "Design Engineering",
+        url: "#",
+        icon: Frame,
+      },
+    ],
+    navSecondary: [
+      {
+        title: "Portfolio Website",
+        url: process.env.NEXT_PUBLIC_PORTFOLIO_URL ?? "http://localhost:3000",
+        icon: Globe,
+      },
+    ],
+  };
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>

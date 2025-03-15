@@ -17,8 +17,9 @@ import { type FC } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { Button } from "@workspace/ui/components/button";
 import Link from "next/link";
-import { Eye } from "lucide-react";
+import { Edit, Eye } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
+import Image from "next/image";
 
 type PageProps = {};
 
@@ -58,12 +59,13 @@ const Page: FC<PageProps> = async ({}) => {
         ]}
       />
 
-      <div className="grid grid-cols-3 gap-6 px-4">
+      <div className="grid grid-cols-4 gap-6 px-4">
         {posts.map((post) => (
-          <Card key={post.id} className="flex flex-col h-full pt-0">
+          <Card key={post.id} className="flex flex-col h-full pb-2 pt-0">
             {post.coverImageUrl && (
               <div className="relative w-full h-48 overflow-hidden rounded-t-lg">
-                <img
+                <Image
+                  fill
                   src={post.coverImageUrl}
                   alt={post.title}
                   className="w-full h-full object-cover"
@@ -74,7 +76,7 @@ const Page: FC<PageProps> = async ({}) => {
               </div>
             )}
 
-            <CardHeader className={!post.coverImageUrl ? "pb-2" : "pb-2 pt-6"}>
+            <CardHeader>
               {!post.coverImageUrl && (
                 <div className="flex justify-end mb-2">
                   <StatusBadge status={post.status} />
@@ -92,7 +94,7 @@ const Page: FC<PageProps> = async ({}) => {
               </CardDescription>
             </CardHeader>
 
-            <CardContent className="flex-grow pb-2">
+            <CardContent className="flex-grow ">
               {post.excerpt && (
                 <p className="text-muted-foreground line-clamp-3">
                   {post.excerpt}
@@ -115,7 +117,7 @@ const Page: FC<PageProps> = async ({}) => {
               )}
             </CardContent>
 
-            <CardFooter className="pt-2 flex justify-between items-center">
+            <CardFooter className="flex justify-between items-center">
               <span className="text-xs text-muted-foreground">
                 {post.publishedAt
                   ? `Published ${formatDistanceToNow(
@@ -131,8 +133,8 @@ const Page: FC<PageProps> = async ({}) => {
 
               <div className="flex items-center gap-2">
                 <Button asChild size="sm" variant="ghost">
-                  <Link href={`/blog/admin/${post.slug}`}>
-                    <Eye className="h-4 w-4 mr-1" /> View
+                  <Link href={`/admin/blog-posts/${post.slug}/edit`}>
+                    <Edit className="h-4 w-4 mr-1" /> Edit
                   </Link>
                 </Button>
               </div>
