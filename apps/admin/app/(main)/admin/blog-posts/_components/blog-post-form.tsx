@@ -27,16 +27,12 @@ import {
   NewBlogPost,
   updateBlogPostSchema,
 } from "@/validators/blog";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@workspace/ui/components/card";
-import { FormTagInput } from "./form-tag-input";
-import { FormMarkdownInput } from "./form-markdown-input";
+import { Card, CardContent, CardFooter } from "@workspace/ui/components/card";
+
 import { Loader2 } from "lucide-react";
+import { TagInput } from "../../../../../components/ui/tag-input";
+import { useRouter } from "next/navigation";
+import { MarkdownInput } from "../../../../../components/ui/markdown-input";
 
 interface BlogPostFormProps {
   type: "create" | "update";
@@ -87,6 +83,8 @@ export function BlogPostForm(props: Props) {
     },
   });
 
+  const router = useRouter();
+
   // Handle form submission with proper type handling
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     props.onSubmit(values as any);
@@ -133,9 +131,6 @@ export function BlogPostForm(props: Props) {
                   </FormItem>
                 )}
               />
-
-              {/* Content Field - Using our custom Markdown Input */}
-
               {/* Excerpt Field */}
               <FormField
                 control={form.control}
@@ -156,7 +151,6 @@ export function BlogPostForm(props: Props) {
                   </FormItem>
                 )}
               />
-
               {/* Cover Image URL Field */}
               <FormField
                 control={form.control}
@@ -178,13 +172,28 @@ export function BlogPostForm(props: Props) {
                   </FormItem>
                 )}
               />
-
               {/* Tags Field - Using our custom Tag Input */}
-              <FormTagInput
-                name="tags"
-                label="Tags"
-                description="Add tags to categorize your post (press Enter to add)"
-                placeholder="Add a tag..."
+              <FormField
+                control={form.control}
+                name={"tags"}
+                render={({ field }) => (
+                  <FormItem>
+                    {<FormLabel>Tags</FormLabel>}
+                    <FormControl>
+                      <TagInput
+                        value={field.value || []}
+                        onChange={field.onChange}
+                        placeholder="Add a tag..."
+                        maxTags={6}
+                        onBlur={field.onBlur}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Add tags to categorize your post (press Enter to add)
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
 
               {/* Status Field */}
@@ -217,15 +226,35 @@ export function BlogPostForm(props: Props) {
                 )}
               />
             </div>
-            <FormMarkdownInput
-              name="content"
-              label="Content"
-              description="Write your blog post content in markdown"
-              placeholder="Start writing your blog post..."
+            <FormField
+              control={form.control}
+              name={"content"}
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Content</FormLabel>
+                  <FormControl>
+                    <MarkdownInput
+                      className="h-full"
+                      value={field.value || ""}
+                      onChange={field.onChange}
+                      placeholder={"Start writing your blog post..."}
+                      onBlur={field.onBlur}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Write your blog post content in markdown
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
           </CardContent>
           <CardFooter className="flex justify-end space-x-2 mt-4">
-            <Button variant="outline" type="button">
+            <Button
+              onClick={() => router.back()}
+              variant="outline"
+              type="button"
+            >
               Cancel
             </Button>
             <Button

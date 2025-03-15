@@ -22,7 +22,7 @@ const BlogPostPage: FC<PageProps> = async ({ params }) => {
           },
           {
             label: "Blog Posts",
-            href: "/blog-posts",
+            href: "/admin/blog-posts",
           },
           {
             label: "Update Post",

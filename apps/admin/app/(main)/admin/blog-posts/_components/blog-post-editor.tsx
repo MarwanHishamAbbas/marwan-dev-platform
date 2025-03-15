@@ -31,7 +31,7 @@ export function BlogPostEditor(props: BlogPostEditorProps) {
 
     try {
       startTransition(async () => {
-        await props.createAction(data).then((data) => {
+        await props.createAction(data).then(() => {
           router.push("/admin/blog-posts");
         });
       });
@@ -45,7 +45,7 @@ export function BlogPostEditor(props: BlogPostEditorProps) {
 
     try {
       startTransition(async () => {
-        await props.updateAction(props.defaultValues.id, data).then((data) => {
+        await props.updateAction(props.defaultValues.id, data).then(() => {
           router.push("/admin/blog-posts");
         });
       });

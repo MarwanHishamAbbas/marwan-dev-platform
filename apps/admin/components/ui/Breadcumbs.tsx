@@ -8,6 +8,7 @@ import {
   BreadcrumbSeparator,
 } from "@workspace/ui/components/breadcrumb";
 import { cn } from "@workspace/ui/lib/utils"; // Assuming this is where your cn utility is imported from
+import Link from "next/link";
 
 // Define a type for each breadcrumb item
 export type BreadcrumbItemType = {
@@ -48,8 +49,8 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({
                 {item.isCurrentPage || isLast ? (
                   <BreadcrumbPage>{item.label}</BreadcrumbPage>
                 ) : (
-                  <BreadcrumbLink href={item.href || "#"}>
-                    {item.label}
+                  <BreadcrumbLink asChild>
+                    <Link href={item.href || "#"}>{item.label}</Link>
                   </BreadcrumbLink>
                 )}
               </BreadcrumbItem>
