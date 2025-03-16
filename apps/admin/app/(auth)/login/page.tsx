@@ -23,7 +23,7 @@ const Page: FC<PageProps> = ({}) => {
 
   async function signInGoogle() {
     googleTransition(async () => {
-      await signIn("google");
+      await signIn("google").catch((error) => console.log(error));
     });
   }
 

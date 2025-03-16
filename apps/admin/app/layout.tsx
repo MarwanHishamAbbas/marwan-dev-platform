@@ -4,7 +4,7 @@ import TailwindIndicator from "@workspace/ui/components/tailwind-indicator";
 
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { eq } from "drizzle-orm";
+import { eq, desc, asc } from "@workspace/database";
 import {
   BlogPostUpdate,
   createBlogPostSchema,
@@ -40,7 +40,7 @@ export async function createBlogPost(data: NewBlogPost) {
         .returning({ id: blogPosts.id });
 
       // Revalidate the blog posts page to show the new post
-      revalidatePath("/blog-posts");
+      revalidatePath("/admin/blog-posts");
 
       return { success: true, id: result[0]?.id };
     }
@@ -98,7 +98,7 @@ export async function updateBlogPost(id: string, data: BlogPostUpdate) {
     await db.update(blogPosts).set(updateData).where(eq(blogPosts.id, id));
 
     // Revalidate the blog post page to show the updated content
-    revalidatePath("/blog-posts");
+    revalidatePath("/admin/blog-posts");
   } catch (error) {
     console.error("Error updating blog post:", error);
     throw error;
@@ -128,18 +128,10 @@ export async function getBlogPost(
 
 export async function getAllBlogPosts() {
   try {
-    const result = await db
-      .select({
-        id: blogPosts.id,
-        title: blogPosts.title,
-        excerpt: blogPosts.excerpt,
-        slug: blogPosts.slug,
-        status: blogPosts.status,
-        createdAt: blogPosts.createdAt,
-        updatedAt: blogPosts.updatedAt,
-      })
-      .from(blogPosts)
-      .orderBy(blogPosts.createdAt);
+    const result = await db.query.blogPosts.findMany({
+      orderBy: [desc(blogPosts.createdAt)],
+      with: { author: true },
+    });
 
     return result;
   } catch (error) {

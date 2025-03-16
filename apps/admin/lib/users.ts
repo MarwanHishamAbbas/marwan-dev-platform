@@ -1,7 +1,7 @@
 "use server";
 
 import { users, db } from "@workspace/database";
-import { eq } from "drizzle-orm";
+import { eq } from "@workspace/database";
 
 export const getUserByEmail = async (email: string) => {
   try {

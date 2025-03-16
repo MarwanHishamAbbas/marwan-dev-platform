@@ -51,7 +51,7 @@ const BlogCard: FC<BlogCardProps> = ({ post }) => {
   return (
     <Card key={post.id} className="flex flex-col h-full pb-2 pt-0">
       {post.coverImageUrl && (
-        <div className="relative w-full h-48 overflow-hidden rounded-t-lg">
+        <div className="relative w-full h-60 overflow-hidden rounded-t-lg">
           <Image
             fill
             src={post.coverImageUrl}
@@ -71,7 +71,7 @@ const BlogCard: FC<BlogCardProps> = ({ post }) => {
           </div>
         )}
         <CardTitle className="line-clamp-2">{post.title}</CardTitle>
-        <CardDescription className="flex items-center gap-2 mt-2">
+        <CardDescription className="flex items-center gap-2 ">
           <Avatar className="h-6 w-6">
             <AvatarImage src={post.author.image || undefined} />
             <AvatarFallback>
@@ -107,13 +107,18 @@ const BlogCard: FC<BlogCardProps> = ({ post }) => {
 
       <CardFooter className="flex justify-between items-center">
         <span className="text-xs text-muted-foreground">
-          {post.publishedAt
-            ? `Published ${formatDistanceToNow(new Date(post.publishedAt), {
-                addSuffix: true,
-              })}`
-            : `Updated ${formatDistanceToNow(new Date(post.updatedAt), {
-                addSuffix: true,
-              })}`}
+          <p className="text-xs dark:text-white/30 text-black/30">
+            {post.updatedAt
+              ? `Updated ${formatDistanceToNow(new Date(post.updatedAt), {
+                  addSuffix: true,
+                })}`
+              : `Published ${formatDistanceToNow(
+                  new Date(post.publishedAt as Date),
+                  {
+                    addSuffix: true,
+                  }
+                )}`}
+          </p>
         </span>
 
         <div className="flex items-center gap-2">

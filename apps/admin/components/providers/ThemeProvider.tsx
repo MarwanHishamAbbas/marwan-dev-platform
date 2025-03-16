@@ -9,8 +9,8 @@ export function ThemeProvider({
   ...props
 }: React.ComponentProps<typeof NextThemesProvider>) {
   return (
-    <SessionProvider>
-      <NextThemesProvider {...props}>{children}</NextThemesProvider>
-    </SessionProvider>
+    <NextThemesProvider {...props}>
+      <SessionProvider>{children}</SessionProvider>
+    </NextThemesProvider>
   );
 }
