@@ -19,6 +19,8 @@ import {
   SidebarMenuSubItem,
 } from "@workspace/ui/components/sidebar";
 import Link from "next/link";
+import { cn } from "@workspace/ui/lib/utils";
+import { usePathname } from "next/navigation";
 
 export function NavMain({
   items,
@@ -34,6 +36,8 @@ export function NavMain({
     }[];
   }[];
 }) {
+  const pathname = usePathname();
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Portfolio</SidebarGroupLabel>
@@ -42,7 +46,12 @@ export function NavMain({
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
             <SidebarMenuItem>
               <SidebarMenuButton asChild tooltip={item.title}>
-                <Link href={item.url}>
+                <Link
+                  href={item.url}
+                  className={cn(
+                    pathname.includes(item.url) && "bg-sidebar-accent"
+                  )}
+                >
                   <item.icon />
                   <span>{item.title}</span>
                 </Link>

@@ -1,8 +1,5 @@
 import { db } from "@workspace/database";
-
-import { Badge } from "@workspace/ui/components/badge";
 import Navbar from "@/components/layout/Navbar";
-
 import { FC } from "react";
 import BlogCard from "@/components/blogs/blog-card";
 import Link from "next/link";

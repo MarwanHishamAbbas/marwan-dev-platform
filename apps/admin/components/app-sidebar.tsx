@@ -30,32 +30,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         url: "/admin/projects",
         icon: Command,
         isActive: true,
-        items: [
-          {
-            title: "History",
-            url: "#",
-          },
-        ],
       },
       {
         title: "Blog Posts",
         url: "/admin/blog-posts",
         icon: Paperclip,
         isActive: true,
-        items: [
-          {
-            title: "History",
-            url: "#",
-          },
-        ],
-      },
-    ],
-
-    projects: [
-      {
-        name: "Design Engineering",
-        url: "#",
-        icon: Frame,
       },
     ],
     navSecondary: [
