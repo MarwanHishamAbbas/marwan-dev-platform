@@ -55,7 +55,7 @@ export function BlogPostEditor(props: BlogPostEditorProps) {
   };
 
   return (
-    <div>
+    <div className="pb-3">
       {props.type === "create" ? (
         <BlogPostForm
           type="create"

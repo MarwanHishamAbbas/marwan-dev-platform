@@ -33,6 +33,7 @@ import { Loader2 } from "lucide-react";
 import { TagInput } from "../../../../../components/ui/tag-input";
 import { useRouter } from "next/navigation";
 import { MarkdownInput } from "../../../../../components/ui/markdown-input";
+import MarkdownEditor from "@/components/ui/rich-text";
 
 interface BlogPostFormProps {
   type: "create" | "update";
@@ -96,148 +97,147 @@ export function BlogPostForm(props: Props) {
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Title Field */}
-            <div className="space-y-6">
-              <FormField
-                control={form.control}
-                name="title"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Title</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter blog post title" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      The title of your blog post (3-100 characters)
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
 
-              {/* Slug Field */}
-              <FormField
-                control={form.control}
-                name="slug"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Slug</FormLabel>
-                    <FormControl>
-                      <Input placeholder="enter-your-slug" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      URL-friendly version of the title (lowercase, hyphens)
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/* Excerpt Field */}
-              <FormField
-                control={form.control}
-                name="excerpt"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Excerpt</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Brief summary of your post"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormDescription>
-                      A short summary (max 200 characters)
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/* Cover Image URL Field */}
-              <FormField
-                control={form.control}
-                name="coverImageUrl"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Cover Image URL</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="https://example.com/image.jpg"
-                        {...field}
-                        value={field.value || ""}
-                      />
-                    </FormControl>
-                    <FormDescription>
-                      URL to the cover image for your blog post
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/* Tags Field - Using our custom Tag Input */}
-              <FormField
-                control={form.control}
-                name={"tags"}
-                render={({ field }) => (
-                  <FormItem>
-                    {<FormLabel>Tags</FormLabel>}
-                    <FormControl>
-                      <TagInput
-                        value={field.value || []}
-                        onChange={field.onChange}
-                        placeholder="Add a tag..."
-                        maxTags={6}
-                        onBlur={field.onBlur}
-                      />
-                    </FormControl>
-                    <FormDescription>
-                      Add tags to categorize your post (press Enter to add)
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              {/* Status Field */}
-              <FormField
-                control={form.control}
-                name="status"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Status</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select post status" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="DRAFT">Draft</SelectItem>
-                        <SelectItem value="PUBLISHED">Published</SelectItem>
-                        <SelectItem value="ARCHIVED">Archived</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormDescription>
-                      Current status of the blog post
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
             <FormField
               control={form.control}
-              name={"content"}
+              name="title"
               render={({ field }) => (
-                <FormItem className="flex flex-col">
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter blog post title" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    The title of your blog post (3-100 characters)
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Slug Field */}
+            <FormField
+              control={form.control}
+              name="slug"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Slug</FormLabel>
+                  <FormControl>
+                    <Input placeholder="enter-your-slug" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    URL-friendly version of the title (lowercase, hyphens)
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* Excerpt Field */}
+            <FormField
+              control={form.control}
+              name="excerpt"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Excerpt</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Brief summary of your post"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    A short summary (max 200 characters)
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* Cover Image URL Field */}
+            <FormField
+              control={form.control}
+              name="coverImageUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Cover Image URL</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="https://example.com/image.jpg"
+                      {...field}
+                      value={field.value || ""}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    URL to the cover image for your blog post
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* Tags Field - Using our custom Tag Input */}
+            <FormField
+              control={form.control}
+              name={"tags"}
+              render={({ field }) => (
+                <FormItem>
+                  {<FormLabel>Tags</FormLabel>}
+                  <FormControl>
+                    <TagInput
+                      value={field.value || []}
+                      onChange={field.onChange}
+                      placeholder="Add a tag..."
+                      maxTags={6}
+                      onBlur={field.onBlur}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Add tags to categorize your post (press Enter to add)
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Status Field */}
+            <FormField
+              control={form.control}
+              name="status"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Status</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select post status" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="DRAFT">Draft</SelectItem>
+                      <SelectItem value="PUBLISHED">Published</SelectItem>
+                      <SelectItem value="ARCHIVED">Archived</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormDescription>
+                    Current status of the blog post
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="content"
+              render={({ field }) => (
+                <FormItem className="flex flex-col col-span-2">
                   <FormLabel>Content</FormLabel>
                   <FormControl>
-                    <MarkdownInput
+                    <MarkdownEditor
                       className="h-full"
                       value={field.value || ""}
                       onChange={field.onChange}
-                      placeholder={"Start writing your blog post..."}
+                      placeholder="Start writing your blog post..."
                       onBlur={field.onBlur}
                     />
                   </FormControl>

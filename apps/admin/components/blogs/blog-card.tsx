@@ -1,6 +1,6 @@
 "use client";
 
-import { type FC } from "react";
+import { useTransition, type FC } from "react";
 import {
   Avatar,
   AvatarFallback,
@@ -18,11 +18,12 @@ import {
 import { formatDistanceToNow } from "date-fns";
 import { Button } from "@workspace/ui/components/button";
 import Link from "next/link";
-import { Edit } from "lucide-react";
+import { Edit, Loader2, Trash } from "lucide-react";
 import { BlogPost } from "@workspace/database";
 import Image from "next/image";
 import { Badge } from "@workspace/ui/components/badge";
 import { User } from "next-auth";
+import { deleteBlogPost } from "@/app/(main)/admin/blog-posts/_actions/actions";
 
 const StatusBadge = ({ status }: { status: string }) => {
   switch (status) {
@@ -48,6 +49,8 @@ type BlogCardProps = {
 };
 
 const BlogCard: FC<BlogCardProps> = ({ post }) => {
+  const [isDeleting, deleteTransition] = useTransition();
+
   return (
     <Card key={post.id} className="flex flex-col h-full pb-2 pt-0">
       {post.coverImageUrl && (
@@ -126,6 +129,23 @@ const BlogCard: FC<BlogCardProps> = ({ post }) => {
             <Link href={`/admin/blog-posts/${post.slug}/edit`}>
               <Edit className="h-4 w-4 mr-1" /> Edit
             </Link>
+          </Button>
+          <Button
+            size="sm"
+            variant="ghost"
+            disabled={isDeleting}
+            onClick={() =>
+              deleteTransition(async () => {
+                await deleteBlogPost(post.id);
+              })
+            }
+          >
+            {isDeleting ? (
+              <Loader2 className="h-4 w-4 mr-1 animate-spin" />
+            ) : (
+              <Trash className="h-4 w-4 mr-1" />
+            )}{" "}
+            Delete
           </Button>
         </div>
       </CardFooter>

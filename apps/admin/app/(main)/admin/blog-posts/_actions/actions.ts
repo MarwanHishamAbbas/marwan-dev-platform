@@ -49,6 +49,22 @@ export async function createBlogPost(data: NewBlogPost) {
     throw error;
   }
 }
+export async function deleteBlogPost(id: string) {
+  try {
+    const result = await db
+      .delete(blogPosts)
+      .where(eq(blogPosts.id, id))
+      .returning({ id: blogPosts.id });
+
+    // Revalidate the blog posts page to show the new post
+    revalidatePath("/admin/blog-posts");
+
+    return { success: true, id: result[0]?.id };
+  } catch (error) {
+    console.error("Error creating blog post:", error);
+    throw error;
+  }
+}
 
 // Server action to update a blog post
 export async function updateBlogPost(id: string, data: BlogPostUpdate) {
