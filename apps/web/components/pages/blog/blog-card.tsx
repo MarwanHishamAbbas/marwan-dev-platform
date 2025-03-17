@@ -8,7 +8,7 @@ import { type FC } from "react";
 const BlogCard: FC<BlogPost> = (post) => {
   return (
     <Link
-      href={`/post-${post.slug}`}
+      href={`/blog/${post.slug}`}
       className="group cursor-pointer space-y-1.5"
     >
       <div className="top-seperator flex flex-col justify-between overflow-hidden rounded-2xl border border-white/30">
