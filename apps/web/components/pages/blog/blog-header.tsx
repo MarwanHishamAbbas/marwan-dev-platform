@@ -35,17 +35,13 @@ const BlogHeader: FC<BlogHeaderProps> = ({
     <header className="space-y-8">
       <div className="space-y-4">
         <div className="flex w-fit items-baseline gap-1 rounded-full dark:bg-white/5 bg-black/5 px-2 py-2 text-sm">
-          {tag?.map((tag, idx) => (
-            <span
-              className="rounded-full dark:bg-white/10 bg-black/10 px-2 py-1"
-              key={idx}
-            >
-              {tag}
-            </span>
-          ))}
+          <span className="rounded-full dark:bg-white/10 bg-black/10 px-2 py-1">
+            {tag?.[0]}
+          </span>
+
           <span className="px-2 py-1">8 min read</span>
         </div>
-        <h1 className="text-3xl font-medium md:text-6xl">{title}</h1>
+        <h1 className="text-3xl font-medium md:text-6xl glowing">{title}</h1>
         <p className="text-base dark:text-white/70 text-black/70 md:text-lg">
           {overview}
         </p>
@@ -64,13 +60,13 @@ const BlogHeader: FC<BlogHeaderProps> = ({
         <div className="flex justify-between gap-8">
           <div>
             <p className="dark:text-white/30 text-black/30">Written by</p>
-            <h4 className="text-lg font-medium">Marwan Hisham</h4>
+            <h4 className="text-sm font-medium">Marwan Hisham</h4>
           </div>
           <div>
             <p className="dark:text-white/30 text-black/30">
               {updatedAt ? "Updated" : "Published"} on
             </p>
-            <h4 className="text-lg font-medium">
+            <h4 className="text-sm font-medium">
               {updatedAt
                 ? `${formatDistanceToNow(new Date(updatedAt), {
                     addSuffix: true,

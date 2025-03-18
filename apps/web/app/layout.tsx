@@ -4,8 +4,6 @@ import TailwindIndicator from "@workspace/ui/components/tailwind-indicator";
 import Footer from "@/components/layout/Footer";
 import { Metadata, Viewport } from "next";
 
-import Navbar from "@/components/layout/Navbar/Navbar";
-
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 export default async function RootLayout({
@@ -22,7 +20,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="md:mt-46 mb-20 mt-36 md:mb-32">{children}</main>
+          <main className=" mb-20 mt-36 md:mb-32">{children}</main>
           <hr className="dark:border-white/5 border-black/5" />
           <Footer />
           <TailwindIndicator />

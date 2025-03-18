@@ -1,7 +1,7 @@
 import Slicer from "@/components/layout/Slicer";
 import Wrapper from "@/components/layout/Wrapper";
 import BlogCard from "@/components/pages/blog/blog-card";
-import { getAllBlogPosts } from "./_actions/actions";
+import { getAllBlogPosts } from "../../(sub-pages)/blog/_actions/actions";
 
 export default async function Page() {
   const blogs = await getAllBlogPosts();

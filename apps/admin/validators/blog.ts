@@ -9,7 +9,7 @@ export const blogPostBaseSchema = z.object({
   content: z.string().min(10, "Content must be at least 10 characters"),
   excerpt: z
     .string()
-    .max(200, "Excerpt cannot exceed 200 characters")
+    .max(300, "Excerpt cannot exceed 300 characters")
     .optional(),
   coverImageUrl: z.string().url("Must be a valid URL").optional().nullable(),
   tags: z.array(z.string()).default([]).optional(),

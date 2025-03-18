@@ -53,19 +53,24 @@ const BlogCard: FC<BlogCardProps> = ({ post }) => {
 
   return (
     <Card key={post.id} className="flex flex-col h-full pb-2 pt-0">
-      {post.coverImageUrl && (
-        <div className="relative w-full h-60 overflow-hidden rounded-t-lg">
-          <Image
-            fill
-            src={post.coverImageUrl}
-            alt={post.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute top-2 right-2">
-            <StatusBadge status={post.status} />
+      <Link
+        href={`${process.env.NEXT_PUBLIC_PORTFOLIO_URL}/blog/${post.slug}`}
+        target="_blank"
+      >
+        {post.coverImageUrl && (
+          <div className="relative w-full h-60 overflow-hidden rounded-t-lg">
+            <Image
+              fill
+              src={post.coverImageUrl}
+              alt={post.title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute top-2 right-2">
+              <StatusBadge status={post.status} />
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </Link>
 
       <CardHeader>
         {!post.coverImageUrl && (

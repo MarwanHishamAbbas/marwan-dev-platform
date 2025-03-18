@@ -3,7 +3,8 @@ import Wrapper from "@/components/layout/Wrapper";
 import BlogHeader from "@/components/pages/blog/blog-header";
 import { type FC } from "react";
 import { getBlogPost } from "../_actions/actions";
-import { Skeleton } from "@workspace/ui/components/skeleton";
+
+import BlogContent from "@/components/pages/blog/blog-content";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -24,14 +25,7 @@ const Page: FC<PageProps> = async ({ params }) => {
             tag={post?.tags ?? []}
             coverImageUrl={post?.coverImageUrl ?? ""}
           />
-          {post ? (
-            <article
-              className="prose"
-              dangerouslySetInnerHTML={{ __html: post?.content as string }}
-            />
-          ) : (
-            <Skeleton />
-          )}
+          <BlogContent content={post?.content as string} />
         </Slicer>
       </Wrapper>
     </>

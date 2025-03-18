@@ -7,9 +7,10 @@ import { type FC } from "react";
 
 interface SecondaryNavbarProps {
   goToPage: string;
+  label: string;
 }
 
-const SecondaryNavbar: FC<SecondaryNavbarProps> = ({ goToPage }) => {
+const SecondaryNavbar: FC<SecondaryNavbarProps> = ({ goToPage, label }) => {
   const router = useRouter();
   return (
     <header className="container fixed left-0 right-0 top-0 z-50 mx-auto flex h-20 items-center px-3 drop-shadow-md backdrop-blur-md xl:drop-shadow-none xl:backdrop-blur-none">
@@ -24,7 +25,7 @@ const SecondaryNavbar: FC<SecondaryNavbarProps> = ({ goToPage }) => {
           size={18}
           className="transition-transform duration-300 group-hover:-translate-x-2"
         />
-        Back
+        {label}
       </Button>
     </header>
   );

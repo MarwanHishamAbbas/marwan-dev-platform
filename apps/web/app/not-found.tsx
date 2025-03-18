@@ -12,7 +12,7 @@ const NotFound = () => {
   return (
     <div>
       <TopGradient />
-      <SecondaryNavbar goToPage="" />
+      <SecondaryNavbar label="Home" goToPage="" />
       <Wrapper className="flex flex-col items-center justify-center gap-4">
         <h1 className="glowing text-6xl font-bold md:text-9xl">404</h1>
         <p className="text-center text-3xl uppercase md:text-5xl">
