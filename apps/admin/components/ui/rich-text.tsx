@@ -92,7 +92,6 @@ const MarkdownEditor = ({
   onBlur,
 }: MarkdownEditorProps) => {
   const [isMounted, setIsMounted] = useState(false);
-  const [editorHtml, setEditorHtml] = useState(value);
 
   const editor = useEditor({
     extensions: [
@@ -129,7 +128,6 @@ const MarkdownEditor = ({
     onUpdate: ({ editor }) => {
       // Get HTML representation
       const html = editor.getHTML();
-      setEditorHtml(html);
 
       // Pass HTML to form handler
       onChange(html);
@@ -858,7 +856,7 @@ const ToolbarMenu = ({ editor }: ToolbarMenuProps) => {
               Add an image to your document.
             </DialogDescription>
           </DialogHeader>
-          <div onSubmit={handleImageSubmit}>
+          <div>
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="imageUrl" className="text-right">
@@ -895,7 +893,7 @@ const ToolbarMenu = ({ editor }: ToolbarMenuProps) => {
               >
                 Cancel
               </Button>
-              <Button type="submit">Insert Image</Button>
+              <Button onClick={handleImageSubmit}>Insert Image</Button>
             </DialogFooter>
           </div>
         </DialogContent>
